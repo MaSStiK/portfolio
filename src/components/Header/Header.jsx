@@ -1,4 +1,5 @@
 "use client"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link"
@@ -11,16 +12,24 @@ import Logo from "@/components/Logo/Logo"
 import "./Header.scss"
 
 export default function Header() {
+    const Router = useRouter()
     const Loc = useLocalization("Header")
     const LanguagesArray = Object.keys(Languages).map(lang => {return {value: lang, title: Languages[lang].title}})
-    const LanguageDefault = typeof window !== "undefined" ? localStorage.language : "ru"
-    const Router = useRouter()
+
+    const [LanguageDefault, setLanguageDefault] = useState();
+    useEffect(() => {
+        if (typeof window !== "undefined") { // Проверяем, что код выполняется на клиенте
+            setLanguageDefault(localStorage.language);
+        }
+    }, [])
+
 
     // Смена языка
     function changeLang(value) {
         console.log("Set new language: " + value)
         localStorage.language = value
-        Router.refresh()
+        setLanguageDefault(value)
+        window.location.reload()
     }
 
     return (
@@ -32,11 +41,17 @@ export default function Header() {
                 <li><NavLink href="/works"><text-primary>#</text-primary>{Loc && Loc.nav.works}</NavLink></li>
                 <li><NavLink href="/about"><text-primary>#</text-primary>{Loc && Loc.nav.about_me}</NavLink></li>
                 <li><NavLink href="/contacts"><text-primary>#</text-primary>{Loc && Loc.nav.contacts}</NavLink></li>
-                <CustomSelect 
-                    options={LanguagesArray}
-                    defaultValue={LanguageDefault}
-                    onChange={value => changeLang(value)}
-                />
+                <li>
+                    {LanguageDefault
+                        ? <CustomSelect
+                            className="language-select"
+                            options={LanguagesArray}
+                            defaultValue={LanguageDefault}
+                            onChange={value => changeLang(value)}
+                        />
+                        : <div className="select-placeholder"></div>
+                    }
+                </li>
             </ul>
         </header>
     )
