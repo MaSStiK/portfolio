@@ -15,6 +15,8 @@ export function useLocalization(category) {
     const [LocalizedData, setLocalizedData] = useState(Languages[DefaultLanguage].data[category]);
     
     useEffect(() => {
+        if (typeof window === "undefined") return
+
         let language
         
         if (localStorage.language) { // Проверяем, существует ли сохранённый язык
