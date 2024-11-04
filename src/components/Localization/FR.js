@@ -1,20 +1,20 @@
-const RU = {
+const FR = {
     Header: {
         nav: {
-            home: "Главная",
-            works: "Работы",
-            about_me: "Обо мне",
-            contacts: "Контакты",
+            home: "accueil",
+            works: "travaux",
+            about_me: "à propos",
+            contacts: "contacts",
         }
     },
     Footer: {
-        web_developer: "Веб-дизайнер и фронтенд-разработчик"
+        web_developer: "Designer web et développeur front-end"
     },
     Loading: {
-        message: "Загрузка..."
+        message: "Chargement..."
     },
     NotFound: {
-        message: "Ошибка 404 - Страница не найдена"
+        message: "Erreur 404 - Page non trouvée"
     },
     Home: {
         info: {
@@ -25,4 +25,4 @@ const RU = {
     }
 }
 
-export default RU
+export default FR

@@ -32,3 +32,42 @@ header {
         }
     }
 }
+
+.select {
+    position: relative;
+
+    &::before {
+        content: "";
+        width: 12px;
+        height: 12px;
+        position: absolute;
+        top: 8px;
+        right: 4px;
+        background-image: url("../../assets/svg/Caret-down.svg");
+        background-repeat: no-repeat;
+        z-index: 1;
+        pointer-events: none;
+    }
+}
+
+select {
+    padding: 2px 22px 2px 4px;
+    background-color: vars.$bg-primary;
+    border: 1px solid transparent;
+
+    font-family: "Fira Code", "Fira Code Fallback";
+    color: text.$white;
+    font-size: 14px;
+
+    appearance: none;
+    position: relative;
+
+    option {
+        border-radius: none;
+        // padding: $gap-tiny;
+        color: text.$white;
+        font-size: 14px;
+        border: 1px solid white;
+        outline: 1px solid white;
+    }
+}

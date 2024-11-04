@@ -1,0 +1,62 @@
+@use "@/app/styles/variables/vars.scss";
+@use "@/app/styles/variables/text.scss";
+@use "@/app/styles/variables/button.scss";
+@use "sass:map";
+@use "sass:color";
+
+// Блок с меню выбора
+.custom-select__wrapper {
+    position: relative;
+
+    // Каретка (Стрелочка вниз)
+    .custom-select__caret {
+        width: 12px;
+        height: 12px;
+        position: absolute;
+        top: 8px;
+        right: 4px;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    &.open .custom-select__caret {
+        rotate: -180deg;
+    }
+
+    // Кнопка с выбором
+    .custom-select {
+        min-height: 25px;
+        padding: 2px 22px 2px 4px;
+        border: none;
+    
+        font-size: 14px;
+    }
+
+    // Когда открыто меню
+    &.open .custom-select__content {
+        display: flex;
+    }
+
+    // Контент внутри меню
+    .custom-select__content {
+        display: none;
+        flex-direction: column;
+        border: vars.$border;
+
+        position: absolute;
+        top: 27px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        // Вариант выбора
+        .custom-option {
+            width: 40px;
+            min-height: 25px;
+            padding: 2px 4px;
+            border: none;
+    
+            color: text.$gray;
+            font-size: 14px;
+        }
+    }
+}

@@ -1,33 +1,41 @@
 "use client"
-import EN from "./EN"
+import { useState, useEffect } from "react"
 import RU from "./RU"
+import EN from "./EN"
+import FR from "./FR"
 
 export const Languages = {
-    ru: {title: "Russian", data: RU},
-    en: {title: "English", data: EN},
-    fr: {title: "French", data: EN},
+    ru: {title: "RU", data: RU},
+    en: {title: "EN", data: EN},
+    fr: {title: "FR", data: FR},
 }
 
 export function useLocalization(category) {
-    // if (window === undefined) return {}
+    const DefaultLanguage = "ru" // Язык по умолчанию
+    const [LocalizedData, setLocalizedData] = useState(Languages[DefaultLanguage].data[category]);
+    
+    useEffect(() => {
+        let language
+        
+        if (localStorage.language) { // Проверяем, существует ли сохранённый язык
+            language = localStorage.language // Берём сохранённый язык
+        } else { // Если нет, используем язык из системы
+            language = navigator.language.substring(0, 2) // Язык по умолчанию (язык системы)
+            localStorage.language = language
+            console.log("Set default language: " + language)
+        }
+    
+        if (!Languages[language]) { // Проверяем, существует ли выбранный язык
+            console.log(`Unknown language: ${language}; Set default language: ${DefaultLanguage}`)
+            language = DefaultLanguage // Если нет, используем язык по умолчанию
+            localStorage.language = DefaultLanguage
+        }
 
-    let language
-    if (localStorage.language) { // Если язык сохранен - берем из localStorage
-        language = localStorage.language
-    } else { // Если язык не сохранен - сохраняем язык по умолчанию
-        language = navigator.language.substring(0,2) // По умолчанию язык системы
-        localStorage.language = language
-        console.log("Set default language: " + language)
-    }
+        console.log(`Languages[${language}].data[${category}]: ${JSON.stringify(Languages[language].data[category], null, 4)}`)
+    
+        // Обновляем состояние данными для выбранного языка и категории
+        setLocalizedData(Languages[language].data[category]);
+    }, [category, localStorage.language]);
 
-    if (!Languages[language]) { // Если не найден язык, то меняем на язык по умолчанию (En)
-        language = "en"
-        localStorage.language = "en"
-        console.log("Unknown language, set default: " + language)
-    }
-
-    // console.log("language", language)
-    // console.log("Languages[language]", Languages[language])
-
-    return Languages[language].data[category]
+    return LocalizedData;
 }

@@ -21,12 +21,10 @@ export default function Footer() {
                         <div className="flex-row">
                             <Logo />
                             <p className="text-gray">mathew.ovchinnikov@gmail.com</p>
-                            {/* todo Добавить кнопку копирования почты */}
                         </div>
                         <p>{Loc.web_developer}</p>
                     </div>
 
-                    {/* todo Заменить ссылки */}
                     <div className="flex-col footer__right">
                         <h2>Media</h2>
                         <div className="flex-row">

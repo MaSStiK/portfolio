@@ -6,7 +6,7 @@ export default function NotFound() {
 
     return (
         <section>
-            <h2>{Loc.error}</h2>
+            <h2>{Loc.message}</h2>
         </section>
     )
 }
