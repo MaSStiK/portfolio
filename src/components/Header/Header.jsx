@@ -13,6 +13,7 @@ import "./Header.scss"
 export default function Header() {
     const Loc = useLocalization("Header")
     const LanguagesArray = Object.keys(Languages).map(lang => {return {value: lang, title: Languages[lang].title}})
+    const LanguageDefault = typeof window !== "undefined" ? localStorage.language : "ru"
     const Router = useRouter()
 
     // Смена языка
@@ -33,16 +34,9 @@ export default function Header() {
                 <li><NavLink href="/contacts"><text-primary>#</text-primary>{Loc && Loc.nav.contacts}</NavLink></li>
                 <CustomSelect 
                     options={LanguagesArray}
-                    defaultSelected={localStorage.language}
+                    defaultValue={LanguageDefault}
                     onChange={value => changeLang(value)}
                 />
-                {/* <div className="select"> */}
-                    {/* <select name="lang" defaultValue={localStorage.language} onChange={(event) => changeLang(event.target.value)}> */}
-                        {/* {Object.keys(Languages).map((language, i) => ( */}
-                            {/* <option value={language} key={i}>{Languages[language].title}</option> */}
-                        {/* ))} */}
-                    {/* </select> */}
-                {/* </div> */}
             </ul>
         </header>
     )
