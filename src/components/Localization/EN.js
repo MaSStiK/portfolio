@@ -16,7 +16,7 @@ const EN = {
     NotFound: {
         message: "Error 404 - Page Not Found"
     },
-    Home: {
+    Index: {
         info: {
             title: <>MaSStiK is a <text-primary>web designer</text-primary> and <text-primary>front-end developer</text-primary></>,
             desc: "He crafts responsive websites where technologies meet creativity",

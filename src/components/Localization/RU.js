@@ -16,11 +16,11 @@ const RU = {
     NotFound: {
         message: "Ошибка 404 - Страница не найдена"
     },
-    Home: {
+    Index: {
         info: {
-            title: <>MaSStiK is a <text-primary>web designer</text-primary> and <text-primary>front-end developer</text-primary></>,
-            desc: "He crafts responsive websites where technologies meet creativity",
-            contact_me: "Contact me!",
+            title: <>MaSStiK — это <text-primary>веб-дизайнер</text-primary> и <text-primary>фронтенд-разработчик</text-primary></>,
+            desc: "Он создаёт адаптивные сайты, где технологии встречаются с креативностью",
+            contact_me: "Свяжитесь со мной!",
         }
     }
 }

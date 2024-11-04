@@ -1,14 +1,16 @@
 "use client"
+import { useLocalization } from "@/components/Localization/Localization";
 
-import "./home.scss"
+import "./index.scss"
 
-export default function Home() {
+export default function Index() {
+    const Loc = useLocalization("Index")
     return (
-        <section className="home-info">
-            <div className="home-info__inner">
-                <h1>MaSStiK is a <text-primary>web designer</text-primary> and <text-primary>front-end developer</text-primary></h1>
-                <p className="text-gray">He crafts responsive websites where technologies meet creativity</p>
-                <button className="primary">Contact me!</button>
+        <section className="index-info">
+            <div className="index-info__inner">
+                <h1>{Loc.info.title}</h1>
+                <p className="text-gray">{Loc.info.desc}</p>
+                <button className="primary">{Loc.info.contact_me}</button>
             </div>
         </section>
     )

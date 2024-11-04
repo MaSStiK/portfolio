@@ -13,15 +13,9 @@ export default function CustomSelect({
 }) {
     const [SelectOpen, setSelectOpen] = useState(false);
     const SelectTitle = options.find(option => option.value === defaultValue).title
-    console.log("SelectTitle", SelectTitle);
-    
     
     const MenuRef = useRef()
-    useClickOutside(MenuRef, closeSelect)
-
-    function closeSelect() {
-        setSelectOpen(false)
-    }
+    useClickOutside(MenuRef, () => setSelectOpen(false))
     
     return (
         <div className={`custom-select__wrapper ${className} ${SelectOpen ? "open" : ""}`} ref={MenuRef}>
@@ -37,7 +31,10 @@ export default function CustomSelect({
                     <button
                         key={key}
                         className={`custom-option ${option.value === defaultValue ? "selected" : ""}`} 
-                        onClick={() => onChange(option.value)}
+                        onClick={() => {
+                            setSelectOpen(false) // Закрываем окно выбора
+                            onChange(option.value) // Отдаем выбранное значение
+                        }}
                     >
                         {option.title}
                     </button>

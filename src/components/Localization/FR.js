@@ -16,11 +16,11 @@ const FR = {
     NotFound: {
         message: "Erreur 404 - Page non trouvée"
     },
-    Home: {
+    Index: {
         info: {
-            title: <>MaSStiK is a <text-primary>web designer</text-primary> and <text-primary>front-end developer</text-primary></>,
-            desc: "He crafts responsive websites where technologies meet creativity",
-            contact_me: "Contact me!",
+            title: <>MaSStiK — <text-primary>web designer</text-primary> et <text-primary>développeur front-end</text-primary></>,
+            desc: "Il crée des sites web adaptatifs où les technologies rencontrent la créativité",
+            contact_me: "Contactez-moi !",
         }
     }
 }

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link"
 import NavLink from "@/components/NavLink/NavLink"
+import { useAppContext } from "@/components/Context/Context"
 import { useLocalization, Languages } from "@/components/Localization/Localization";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import Logo from "@/components/Logo/Logo"
@@ -12,14 +13,14 @@ import Logo from "@/components/Logo/Logo"
 import "./Header.scss"
 
 export default function Header() {
-    const Router = useRouter()
     const Loc = useLocalization("Header")
+    const { PageLanguage, setPageLanguage} = useAppContext()
     const LanguagesArray = Object.keys(Languages).map(lang => {return {value: lang, title: Languages[lang].title}})
 
-    const [LanguageDefault, setLanguageDefault] = useState();
+    const [SelectedLanguage, setSelectedLanguage] = useState();
     useEffect(() => {
         if (typeof window !== "undefined") { // Проверяем, что код выполняется на клиенте
-            setLanguageDefault(localStorage.language);
+            setSelectedLanguage(localStorage.language);
         }
     }, [])
 
@@ -28,8 +29,9 @@ export default function Header() {
     function changeLang(value) {
         console.log("Set new language: " + value)
         localStorage.language = value
-        setLanguageDefault(value)
-        window.location.reload()
+        setPageLanguage(value)
+        setSelectedLanguage(value)
+        // window.location.reload()
     }
 
     return (
@@ -42,11 +44,11 @@ export default function Header() {
                 <li><NavLink href="/about"><text-primary>#</text-primary>{Loc && Loc.nav.about_me}</NavLink></li>
                 <li><NavLink href="/contacts"><text-primary>#</text-primary>{Loc && Loc.nav.contacts}</NavLink></li>
                 <li>
-                    {LanguageDefault
+                    {SelectedLanguage
                         ? <CustomSelect
                             className="language-select"
                             options={LanguagesArray}
-                            defaultValue={LanguageDefault}
+                            defaultValue={SelectedLanguage}
                             onChange={value => changeLang(value)}
                         />
                         : <div className="select-placeholder"></div>
