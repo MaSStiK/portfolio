@@ -32,14 +32,14 @@ export function useLocalization(category) {
                 language = DefaultLanguage // Если нет, используем язык по умолчанию
                 localStorage.language = DefaultLanguage
             }
-            
+
         }
 
         console.log(`Languages[${language}].data[${category}]: ${JSON.stringify(Languages[language].data[category], null, 4)}`)
     
         // Обновляем состояние данными для выбранного языка и категории
         setLocalizedData(Languages[language].data[category]);
-    }, [category, localStorage.language]);
+    }, [category]);
 
     return LocalizedData;
 }
