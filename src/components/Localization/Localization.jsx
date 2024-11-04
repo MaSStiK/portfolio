@@ -15,9 +15,9 @@ export function useLocalization(category) {
     const [LocalizedData, setLocalizedData] = useState(Languages[DefaultLanguage].data[category]);
     
     useEffect(() => {
-        let language = DefaultLanguage
-
         if (typeof window !== "undefined") { // Проверяем, что код выполняется на клиенте
+
+            let language = DefaultLanguage
 
             if (localStorage.language) { // Проверяем, существует ли сохранённый язык
                 language = localStorage.language // Берём сохранённый язык
@@ -33,12 +33,12 @@ export function useLocalization(category) {
                 localStorage.language = DefaultLanguage
             }
 
-        }
-
-        console.log(`Languages[${language}].data[${category}]: ${JSON.stringify(Languages[language].data[category], null, 4)}`)
+            console.log(`Languages[${language}].data[${category}]: ${JSON.stringify(Languages[language].data[category], null, 4)}`)
     
-        // Обновляем состояние данными для выбранного языка и категории
-        setLocalizedData(Languages[language].data[category]);
+            // Обновляем состояние данными для выбранного языка и категории
+            setLocalizedData(Languages[language].data[category]);
+            
+        }
     }, [category]);
 
     return LocalizedData;
